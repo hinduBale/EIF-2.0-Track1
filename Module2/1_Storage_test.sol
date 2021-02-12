@@ -8,11 +8,15 @@ import "../contracts/1_Storage.sol";
 // File name has to end with '_test.sol', this file can contain more than one testSuite contracts
 contract testSuite {
 
+    Storage storageContractObject;
+    
     /// 'beforeAll' runs before all other tests
     /// More special functions are: 'beforeEach', 'beforeAll', 'afterEach' & 'afterAll'
+    
     function beforeAll() public {
         // Here should instantiate tested contract
         Assert.equal(uint(1), uint(1), "1 should be equal to 1");
+        storageContractObject = new Storage();
     }
 
     function checkSuccess() public {
@@ -40,11 +44,10 @@ contract testSuite {
         Assert.equal(msg.sender, TestsAccounts.getAccount(1), "Invalid sender");
         Assert.equal(msg.value, 100, "Invalid value");
     }
-    
-    Storage storageContractObject;
-    
+
+    // Custom test function
     function checkCorrectAssignment() public returns (bool) {
-        storageContractObject.store(100);
-        return Assert.equal(storageContractObject.retrieve(), 100, "Value is not assiged as expected");
+        storageContractObject.store(108);
+        return Assert.equal(storageContractObject.retrieve(), 108, "Value is not assiged as expected");
     }
 }
