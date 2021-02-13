@@ -45,9 +45,21 @@ contract testSuite {
         Assert.equal(msg.value, 100, "Invalid value");
     }
 
-    // Custom test function
+
+
+    // Custom TCs
     function checkCorrectAssignment() public returns (bool) {
         storageContractObject.store(108);
         return Assert.equal(storageContractObject.retrieve(), 108, "Value is not assiged as expected");
     }
+
+    funtion checkAssignmentInLoops() public returns (bool) {
+        uint testVar = 0;
+        uint iterations = 10;
+        while(testVar < iterations) {
+            testVar++;
+            Assert.greaterThan(iterations, testVar, "testVar should not exceed iterations variable");
+        }
+    }
+
 }
